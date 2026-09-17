@@ -27,7 +27,8 @@ multilingual-healthcare-rag/
 ├── README.md                                          # Documentation & Usage Guide
 ├── requirements.txt                                  # Dependency specifications
 ├── data/
-│   └── evidence_dataset.csv                           # 25+ curated evidence records with authentic URLs
+│   ├── Datensatz_raw.csv                              # Original Datensatz source dataset (750 records)
+│   └── evidence_dataset.csv                           # 750 standardized clinical evidence records with URLs
 ├── src/
 │   ├── __init__.py
 │   ├── preprocessing.py                              # Text cleaning & Hinglish normalization

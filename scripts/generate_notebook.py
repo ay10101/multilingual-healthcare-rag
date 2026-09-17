@@ -98,221 +98,34 @@ print("✅ All core libraries successfully imported!")""")
 
 # Step 3
 add_md("""## Step 3 — Prepare Trusted Evidence Dataset
-We create a curated clinical repository containing verified evidence records from reputable health organizations (**WHO, CDC, NHS, Memorial Sloan Kettering, Cancer Research UK, PubMed**).
+We load the curated clinical repository (`evidence_dataset.csv`) converted from the comprehensive `Datensatz.csv` dataset (Medizin Transparent clinical trials and evidence synthesis).
+It contains 750 verified medical evidence records across a wide range of clinical topics (COVID-19, masks, cancer, CBD, vaccines, supplements, antibiotics, and treatments).
 
 Required Schema:
 - `id`: Unique record identifier
-- `claim_topic`: The clinical subject / myth category
-- `evidence_text`: Verified medical consensus statement
-- `stance`: `supports` or `refutes`
-- `source`: Reputable institutional publisher
+- `claim_topic`: Clinical topic / evaluated medical claim
+- `evidence_text`: Verified medical consensus & trial findings
+- `stance`: `supports`, `refutes`, or `uncertain`
+- `source`: Reputable institutional publisher (Medizin Transparent / Cochrane / Clinical Trials)
 - `url`: Direct source link for transparency""")
 
-add_code("""evidence_data = [
-    {
-        "id": 1,
-        "claim_topic": "cancer cure",
-        "evidence_text": "There is no reliable scientific evidence that turmeric (haldi), turmeric milk (haldi doodh), or curcumin alone can cure or treat cancer in humans.",
-        "stance": "refutes",
-        "source": "Cancer Research UK",
-        "url": "https://www.cancerresearchuk.org/about-cancer/treatment/complementary-alternative-therapies/individual-therapies/turmeric"
-    },
-    {
-        "id": 2,
-        "claim_topic": "cancer cure",
-        "evidence_text": "While curcumin has shown antioxidant properties in laboratory studies, clinical trials have not demonstrated that turmeric cures malignant tumors.",
-        "stance": "refutes",
-        "source": "Memorial Sloan Kettering",
-        "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/turmeric"
-    },
-    {
-        "id": 3,
-        "claim_topic": "smoking and cancer",
-        "evidence_text": "Cigarette smoking is the leading cause of lung cancer, linked to approximately 80% to 90% of lung cancer deaths.",
-        "stance": "supports",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/tobacco/basic_information/health_effects/cancer/index.htm"
-    },
-    {
-        "id": 4,
-        "claim_topic": "smoking and cancer",
-        "evidence_text": "Tobacco smoke contains more than 7,000 chemicals, at least 69 of which are known to cause cancer in humans and animals.",
-        "stance": "supports",
-        "source": "WHO",
-        "url": "https://www.who.int/news-room/fact-sheets/detail/tobacco"
-    },
-    {
-        "id": 5,
-        "claim_topic": "vaccines",
-        "evidence_text": "Multiple rigorous scientific studies involving millions of children over decades have found no causal link between vaccines and autism.",
-        "stance": "refutes",
-        "source": "WHO",
-        "url": "https://www.who.int/news-room/questions-and-answers/item/vaccines-and-immunization-myths-and-facts"
-    },
-    {
-        "id": 6,
-        "claim_topic": "vaccines",
-        "evidence_text": "Extensive scientific research by the Institute of Medicine has demonstrated that vaccines and vaccine ingredients do not cause autism.",
-        "stance": "refutes",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/vaccinesafety/concerns/autism.html"
-    },
-    {
-        "id": 7,
-        "claim_topic": "vaccines",
-        "evidence_text": "Vaccines are rigorously evaluated for safety and provide high efficacy in preventing life-threatening infectious diseases.",
-        "stance": "supports",
-        "source": "WHO",
-        "url": "https://www.who.int/health-topics/vaccines-and-immunization"
-    },
-    {
-        "id": 8,
-        "claim_topic": "antibiotics",
-        "evidence_text": "Antibiotics treat bacterial infections only; they do not kill viruses or cure viral infections such as the common cold, flu, or viral bronchitis.",
-        "stance": "refutes",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/antibiotic-use/common-illnesses.html"
-    },
-    {
-        "id": 9,
-        "claim_topic": "antibiotics",
-        "evidence_text": "Taking antibiotics for viral illnesses will not cure the infection, will not prevent others from getting sick, and can cause unnecessary side effects.",
-        "stance": "refutes",
-        "source": "NHS",
-        "url": "https://www.nhs.uk/conditions/antibiotics/"
-    },
-    {
-        "id": 10,
-        "claim_topic": "antibiotics",
-        "evidence_text": "Antibiotic overuse for viral infections accelerates antibiotic resistance, rendering crucial medicines ineffective against serious bacterial threats.",
-        "stance": "refutes",
-        "source": "WHO",
-        "url": "https://www.who.int/news-room/fact-sheets/detail/antibiotic-resistance"
-    },
-    {
-        "id": 11,
-        "claim_topic": "diabetes",
-        "evidence_text": "There is currently no permanent herbal cure for diabetes; diabetes is a chronic condition managed through lifestyle, insulin, and prescription medication.",
-        "stance": "refutes",
-        "source": "American Diabetes Association",
-        "url": "https://diabetes.org/about-diabetes"
-    },
-    {
-        "id": 12,
-        "claim_topic": "diabetes",
-        "evidence_text": "While some herbs like bitter gourd or fenugreek may modestly assist glucose metabolism, no herbal medicine reverses or permanently cures diabetes.",
-        "stance": "refutes",
-        "source": "Mayo Clinic",
-        "url": "https://www.mayoclinic.org/diseases-conditions/diabetes/in-depth/diabetes-management/art-20047945"
-    },
-    {
-        "id": 13,
-        "claim_topic": "diabetes",
-        "evidence_text": "Discontinuing medical therapy for diabetes in favor of unproven alternative or herbal remedies can lead to diabetic ketoacidosis and organ failure.",
-        "stance": "refutes",
-        "source": "NHS",
-        "url": "https://www.nhs.uk/conditions/type-2-diabetes/"
-    },
-    {
-        "id": 14,
-        "claim_topic": "hygiene",
-        "evidence_text": "Handwashing with soap and clean water removes pathogens from hands and reduces the transmission of respiratory and diarrheal infections.",
-        "stance": "supports",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/clean-hands/about/index.html"
-    },
-    {
-        "id": 15,
-        "claim_topic": "hygiene",
-        "evidence_text": "Effective hand hygiene practices in healthcare and community environments can reduce the spread of infectious diseases by up to 50%.",
-        "stance": "supports",
-        "source": "WHO",
-        "url": "https://www.who.int/campaigns/world-hand-hygiene-day"
-    },
-    {
-        "id": 16,
-        "claim_topic": "covid-19",
-        "evidence_text": "Drinking, gargling, or rinsing with salt water or vinegar does not kill the coronavirus and does not prevent COVID-19 infection.",
-        "stance": "refutes",
-        "source": "WHO",
-        "url": "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters"
-    },
-    {
-        "id": 17,
-        "claim_topic": "covid-19",
-        "evidence_text": "Inhaling steam or taking extremely hot baths does not prevent or cure coronavirus infection and can cause severe thermal burns to airways.",
-        "stance": "refutes",
-        "source": "WHO",
-        "url": "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters"
-    },
-    {
-        "id": 18,
-        "claim_topic": "heart disease",
-        "evidence_text": "Regular physical exercise, maintaining a healthy weight, and eating a balanced diet significantly reduce cardiovascular disease risk.",
-        "stance": "supports",
-        "source": "American Heart Association",
-        "url": "https://www.heart.org/en/healthy-living/fitness"
-    },
-    {
-        "id": 19,
-        "claim_topic": "hypertension",
-        "evidence_text": "Garlic supplements and herbal teas cannot substitute for prescribed antihypertensive medication for controlling severe hypertension.",
-        "stance": "refutes",
-        "source": "PubMed",
-        "url": "https://pubmed.ncbi.nlm.nih.gov/24059423/"
-    },
-    {
-        "id": 20,
-        "claim_topic": "fever",
-        "evidence_text": "Fever is an immune response to fight infection; mild viral fevers resolve with hydration and rest, and antibiotics provide no benefit for viral fevers.",
-        "stance": "refutes",
-        "source": "NHS",
-        "url": "https://www.nhs.uk/conditions/fever-in-adults/"
-    },
-    {
-        "id": 21,
-        "claim_topic": "cancer cure",
-        "evidence_text": "No alternative therapies, herbal concoctions, or alkaline diets have been proven to cure or eradicate malignant cancer tumors.",
-        "stance": "refutes",
-        "source": "Tata Memorial Centre",
-        "url": "https://tmc.gov.in/"
-    },
-    {
-        "id": 22,
-        "claim_topic": "pregnancy",
-        "evidence_text": "Pregnant women should always consult a licensed doctor before taking any herbal remedies, as many can induce premature contractions or toxicity.",
-        "stance": "supports",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/pregnancy/meds/treatingfortwo/index.html"
-    },
-    {
-        "id": 23,
-        "claim_topic": "covid-19",
-        "evidence_text": "Authorized COVID-19 vaccines have been shown to be safe and highly effective in preventing hospitalization and severe disease outcomes.",
-        "stance": "supports",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/effectiveness.html"
-    },
-    {
-        "id": 24,
-        "claim_topic": "mental health",
-        "evidence_text": "Depression is a legitimate medical disorder treated effectively with psychotherapy and prescription medication, not a lack of mental resolve.",
-        "stance": "supports",
-        "source": "NIMH",
-        "url": "https://www.nimh.nih.gov/health/topics/depression"
-    },
-    {
-        "id": 25,
-        "claim_topic": "immune boost",
-        "evidence_text": "No single food, vitamin megadose, or herbal supplement can instantly 'boost' the immune system to make a person immune to viral infections.",
-        "stance": "refutes",
-        "source": "Harvard Health",
-        "url": "https://www.health.harvard.edu/staying-healthy/how-to-boost-your-immune-system"
-    }
-]
+add_code("""import os
+import pandas as pd
 
-evidence_df = pd.DataFrame(evidence_data)
+# Path to the primary evidence dataset
+DATASET_PATH = "data/evidence_dataset.csv"
+GITHUB_RAW_URL = "https://raw.githubusercontent.com/ay10101/multilingual-healthcare-rag/main/data/evidence_dataset.csv"
+
+if os.path.exists(DATASET_PATH):
+    evidence_df = pd.read_csv(DATASET_PATH)
+else:
+    # If running directly in Colab without cloned repo, download automatically from GitHub
+    print("Fetching evidence dataset directly from GitHub repository...")
+    evidence_df = pd.read_csv(GITHUB_RAW_URL)
+
 print(f"✅ Loaded {len(evidence_df)} trusted evidence records across {evidence_df['claim_topic'].nunique()} health topics.")
+print("Stance distribution:")
+print(evidence_df['stance'].value_counts())
 evidence_df.head(5)""")
 
 # Step 4
@@ -413,8 +226,13 @@ add_code("""HEALTH_KEYWORDS = {
     "smoking", "tobacco", "cigarette", "lungs", "lung", "hypertension",
     "stroke", "tumor", "chemo", "chemotherapy", "dosage", "drug", "drugs",
     "pain", "autism", "immune", "immunity", "handwash", "handwashing", "soap",
-    "hygiene", "sanitize", "sanitizer", "bimari", "bimaari", "ilaj", "ilaaj",
-    "dawa", "dawai", "haldi", "doodh", "dard", "sehat", "aspatal", "khansi",
+    "hygiene", "sanitize", "sanitizer", "mask", "masks", "corona", "cbd",
+    "cannabis", "cannabidiol", "headache", "headaches", "migraine", "migraines",
+    "osteoarthritis", "arthritis", "joint", "joints", "knee", "herbal", "therapy",
+    "paxlovid", "allergy", "allergies", "syndrome", "disorder", "symptom", "symptoms",
+    "clinical", "patient", "patients", "supplement", "supplements", "vitamin", "vitamins",
+    "bimari", "bimaari", "ilaj", "ilaaj", "dawa", "dawai", "haldi", "doodh",
+    "dard", "sehat", "aspatal", "khansi", "bukhar", "sugar", "chot",
     "कैंसर", "वैक्सीन", "टीका", "दवा", "इलाज", "बीमारी", "मधुमेह", "बुखार"
 }
 
@@ -663,10 +481,11 @@ with gr.Blocks(title="Healthcare Misinformation RAG") as demo:
             gr.Markdown("### Demo Test Inputs")
             gr.Examples(
                 examples=[
+                    ["Can masks reduce corona infections when worn by a large proportion of the population?"],
+                    ["Does arthroscopy help with osteoarthritis of the knee joint?"],
+                    ["Can CBD help with migraines or other headaches?"],
+                    ["Does paxlovid protect unvaccinated people with risk factors from severe covid?"],
                     ["Haldi doodh cancer ko theek karta hai"],
-                    ["Vaccines autism cause karte hain"],
-                    ["Smoking causes lung cancer"],
-                    ["Antibiotics cold ko cure karte hain"],
                     ["India won the cricket match"]
                 ],
                 inputs=[input_box]

@@ -159,10 +159,11 @@ def create_demo():
                 gr.Markdown("### Demo Test Inputs")
                 gr.Examples(
                     examples=[
+                        ["Can masks reduce corona infections when worn by a large proportion of the population?"],
+                        ["Does arthroscopy help with osteoarthritis of the knee joint?"],
+                        ["Can CBD help with migraines or other headaches?"],
+                        ["Does paxlovid protect unvaccinated people with risk factors from severe covid?"],
                         ["Haldi doodh cancer ko theek karta hai"],
-                        ["Vaccines autism cause karte hain"],
-                        ["Smoking causes lung cancer"],
-                        ["Antibiotics cold ko cure karte hain"],
                         ["India won the cricket match"],
                     ],
                     inputs=[claim_input],

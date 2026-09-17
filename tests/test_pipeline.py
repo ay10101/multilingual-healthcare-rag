@@ -83,7 +83,7 @@ class TestDatasetIntegrity(unittest.TestCase):
             self.assertGreaterEqual(len(rows), 20, "Should have at least 20 records.")
 
             for r in rows:
-                self.assertIn(r["stance"].strip().lower(), {"supports", "refutes"})
+                self.assertIn(r["stance"].strip().lower(), {"supports", "refutes", "uncertain"})
                 self.assertTrue(r["url"].startswith("http"), f"Invalid URL: {r['url']}")
                 self.assertTrue(len(r["evidence_text"].strip()) > 10)
 

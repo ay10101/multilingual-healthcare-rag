@@ -21,7 +21,11 @@ HEALTH_KEYWORDS = {
     "smoking", "tobacco", "cigarette", "lungs", "lung", "hypertension",
     "stroke", "tumor", "chemo", "chemotherapy", "dosage", "drug", "drugs",
     "pain", "autism", "immune", "immunity", "handwash", "handwashing", "soap",
-    "hygiene", "sanitize", "sanitizer",
+    "hygiene", "sanitize", "sanitizer", "mask", "masks", "corona", "cbd",
+    "cannabis", "cannabidiol", "headache", "headaches", "migraine", "migraines",
+    "osteoarthritis", "arthritis", "joint", "joints", "knee", "herbal", "therapy",
+    "paxlovid", "allergy", "allergies", "syndrome", "disorder", "symptom", "symptoms",
+    "clinical", "patient", "patients", "supplement", "supplements", "vitamin", "vitamins",
     # Hinglish terms
     "bimari", "bimaari", "ilaj", "ilaaj", "dawa", "dawai", "haldi", "doodh",
     "dard", "sehat", "aspatal", "khansi", "bukhar", "sugar", "chot",
