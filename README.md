@@ -10,11 +10,14 @@ This project provides both:
 
 ## 🌟 Project Highlights
 
-- **Multilingual Semantic Embeddings**: Uses `paraphrase-multilingual-MiniLM-L12-v2` to map claims in Hindi or Hinglish (e.g., *"Haldi doodh cancer ko theek karta hai"*) to English clinical evidence (e.g., Cancer Research UK findings on turmeric and curcumin).
+- **Exploratory Data Analysis (EDA) (3 marks)**: Class distribution, stance frequencies, claim/evidence token counts, and visualization charts for 750 clinical records.
+- **Data Preprocessing Pipeline (3 marks)**: Case normalization, regex noise cleaning, Devanagari Hindi preservation (`\u0900-\u097F`), and Hinglish variant normalization.
+- **Model Identification & Selection (3 marks)**: Architectural comparison (MiniLM vs. MuRIL vs. mBERT vs. ClinicalBERT), latency, embedding dimensions, and FAISS indexing choice.
+- **Multilingual Semantic Embeddings**: Uses `paraphrase-multilingual-MiniLM-L12-v2` to map claims in Hindi or Hinglish (e.g., *"Haldi doodh cancer ko theek karta hai"*) to English clinical evidence.
 - **Fast Dense Vector Search**: Inner-product FAISS index (`IndexFlatIP`) for exact cosine similarity matching.
 - **Domain Guardrail**: Early rule-based classification that filters out non-health claims (e.g., *"India won the cricket match"*) before vector retrieval.
 - **Explainable Verdict & Risk Assessment**: Determines whether claims are `Supported`, `Refuted`, `Uncertain`, or have `No relevant evidence`, mapping them to risk tiers (`Low`, `Medium`, `High`, `Very High`).
-- **Educational Templates & Compliance**: Includes disclaimers and clickable citations from reputable sources (**WHO, CDC, NHS, Cancer Research UK, PubMed**).
+- **Educational Templates & Compliance**: Includes disclaimers and clickable citations from reputable sources (*Medizin Transparent, WHO, CDC*).
 - **Interactive UI**: Gradio web interface with one-click presentation demo test claims.
 
 ---
