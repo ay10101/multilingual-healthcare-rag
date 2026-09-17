@@ -34,6 +34,7 @@ multilingual-healthcare-rag/
 │   └── evidence_dataset.csv                           # 750 standardized clinical evidence records with URLs
 ├── src/
 │   ├── __init__.py
+│   ├── eda.py                                        # Exploratory Data Analysis & statistical plotting script
 │   ├── preprocessing.py                              # Text cleaning & Hinglish normalization
 │   ├── language_detector.py                          # Hindi (Devanagari) / Hinglish / English detector
 │   ├── health_classifier.py                          # Rule-based health claim filter
