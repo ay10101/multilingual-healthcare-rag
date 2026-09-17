@@ -26,6 +26,10 @@ HEALTH_KEYWORDS = {
     "osteoarthritis", "arthritis", "joint", "joints", "knee", "herbal", "therapy",
     "paxlovid", "allergy", "allergies", "syndrome", "disorder", "symptom", "symptoms",
     "clinical", "patient", "patients", "supplement", "supplements", "vitamin", "vitamins",
+    "cold", "colds", "sore", "sores", "cold sores", "cold sore", "herpes", "lysine", "blister", "blisters",
+    "prevent", "preventive", "prevention", "relieve", "alleviate", "heal", "healing",
+    "remedy", "remedies", "dementia", "alzheimer", "prostate", "skin", "muscle", "back pain",
+    "cystitis", "urinary", "kidney", "liver", "ulcer", "gut", "stomach", "acne", "asthma",
     # Hinglish terms
     "bimari", "bimaari", "ilaj", "ilaaj", "dawa", "dawai", "haldi", "doodh",
     "dard", "sehat", "aspatal", "khansi", "bukhar", "sugar", "chot",
